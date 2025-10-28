@@ -1,17 +1,28 @@
 import type { Metadata } from 'next'
 import Footer from './components/Footer'
-import { Inter } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
+// Optimized font loading with next/font
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-inter',
+  preload: true,
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+  preload: true,
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Soy Res - Software Engineer & Marathon Runner',
-    template: '%s | Soy Res'
+    default: 'Res Pizarro - Software Engineer & Marathon Runner',
+    template: '%s | Res Pizarro'
   },
   description: 'Portfolio of Res Pizarro - Software engineer specializing in React, Next.js, and TypeScript. Marathon runner based in Denver, Colorado. Exploring the intersection of technology, endurance, and personal growth.',
   keywords: ['software engineer', 'web developer', 'React', 'Next.js', 'TypeScript', 'marathon runner', 'Denver', 'full-stack developer'],
@@ -28,10 +39,10 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Soy Res - Software Engineer & Marathon Runner',
+    title: 'Res Pizarro - Software Engineer & Marathon Runner',
     description: 'Portfolio showcasing full-stack development projects, marathon training insights, and thoughts on technology and personal growth.',
     url: 'https://soyres.com',
-    siteName: 'Soy Res Portfolio',
+    siteName: 'Res Pizarro Portfolio',
     locale: 'en_US',
     type: 'website',
     images: [
@@ -45,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Soy Res - Software Engineer & Marathon Runner',
+    title: 'Res Pizarro - Software Engineer & Marathon Runner',
     description: 'Portfolio showcasing full-stack development projects, marathon training insights, and thoughts on technology.',
     images: ['/soy_res.png'],
   },
@@ -68,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
         {/* Structured Data for Person */}
         <script

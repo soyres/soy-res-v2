@@ -2,31 +2,25 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { siteConfig } from '@/app/config/siteConfig'
 import styles from './Footer.module.css'
 
-interface SocialLink {
-  name: string
-  href: string
-  icon: string
-  color: string
-}
-
-const socialLinks: SocialLink[] = [
+const socialLinks = [
   { 
     name: 'GitHub', 
-    href: 'https://github.com/yourusername',
+    href: siteConfig.social.github,
     icon: '💻',
     color: '#00f0ff'
   },
   { 
     name: 'LinkedIn', 
-    href: 'https://linkedin.com/in/yourusername',
+    href: siteConfig.social.linkedin,
     icon: '💼',
     color: '#0077b5'
   },
   { 
     name: 'Email', 
-    href: 'mailto:respizarro3@gmail.com',
+    href: `mailto:${siteConfig.email}`,  // FIXED: No more double .com
     icon: '📧',
     color: '#00ff88'
   },
@@ -58,7 +52,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className={styles.brandSection}>
             <Link href="/" className={styles.brandLink}>
-              <h3 className={styles.brandName}>Soy Res</h3>
+              <h3 className={styles.brandName}>{siteConfig.name}</h3>
             </Link>
             <p className={styles.brandTagline}>
               Building things, running miles, writing words.
@@ -71,8 +65,8 @@ export default function Footer() {
                   href={social.href}
                   className={styles.socialLink}
                   style={{ '--social-color': social.color } as React.CSSProperties}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={social.name !== 'Email' ? '_blank' : undefined}
+                  rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
                   aria-label={social.name}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -138,10 +132,10 @@ export default function Footer() {
           transition={{ delay: 0.3, duration: 0.4 }}
         >
           <p className={styles.copyright}>
-            © {currentYear} Res Pizarro. All rights reserved.
+            © {currentYear} {siteConfig.name}. All rights reserved.
           </p>
           <p className={styles.madeWith}>
-            Made with <span className={styles.heart}>♥</span> in Denver
+            Made with <span className={styles.heart}>♥</span> in {siteConfig.location.city}
           </p>
         </motion.div>
       </div>

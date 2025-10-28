@@ -4,15 +4,66 @@
   border-radius: 20px;
   padding: 2rem;
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   cursor: pointer;
+  overflow: hidden;
+}
+
+/* Animated background gradient on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent-color) 15%, transparent), transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card:hover::before {
+  width: 300%;
+  height: 300%;
+  opacity: 1;
 }
 
 .card:hover {
   border-color: var(--accent-color);
-  box-shadow: 0 0 30px color-mix(in srgb, var(--accent-color) 20%, transparent);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 60px color-mix(in srgb, var(--accent-color) 25%, transparent);
   background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Shimmer effect on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover::after {
+  transform: translateX(100%) translateY(100%) rotate(45deg);
 }
 
 /* Badge */
@@ -28,6 +79,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  z-index: 10;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 40%, transparent);
 }
 
 /* Icon */
@@ -35,6 +88,14 @@
   font-size: 3rem;
   margin-bottom: 1rem;
   filter: drop-shadow(0 0 15px color-mix(in srgb, var(--accent-color) 30%, transparent));
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.card:hover .icon {
+  filter: drop-shadow(0 0 25px var(--accent-color));
+  transform: scale(1.1) translateY(-5px);
 }
 
 /* Content */
@@ -42,6 +103,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: relative;
+  z-index: 2;
 }
 
 .title {
@@ -49,7 +112,12 @@
   font-weight: 600;
   color: white;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-family: var(--font-display);
+  transition: color 0.3s ease;
+}
+
+.card:hover .title {
+  color: var(--accent-color);
 }
 
 .subtitle {
@@ -59,6 +127,12 @@
   letter-spacing: 0.1em;
   margin: 0;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.card:hover .subtitle {
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 10px var(--accent-color);
 }
 
 .description {
@@ -66,6 +140,11 @@
   font-size: 0.875rem;
   line-height: 1.6;
   margin: 0;
+  transition: color 0.3s ease;
+}
+
+.card:hover .description {
+  color: #e0e0e0;
 }
 
 /* Metadata */
@@ -75,6 +154,11 @@
   gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease;
+}
+
+.card:hover .metadata {
+  border-top-color: color-mix(in srgb, var(--accent-color) 30%, transparent);
 }
 
 .metaItem {
@@ -89,12 +173,24 @@
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.card:hover .metaLabel {
+  color: #aaa;
 }
 
 .metaValue {
   font-size: 1.1rem;
   color: var(--accent-color);
   font-weight: 700;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 20%, transparent);
+  transition: all 0.3s ease;
+}
+
+.card:hover .metaValue {
+  text-shadow: 0 0 20px var(--accent-color);
+  transform: scale(1.05);
 }
 
 /* Links */
@@ -113,12 +209,28 @@
   font-weight: 600;
   transition: all 0.3s ease;
   padding: 0.5rem 0;
+  position: relative;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.link:hover::after {
+  width: 100%;
 }
 
 .link:hover {
   color: white;
   text-shadow: 0 0 10px var(--accent-color);
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 /* Variant: Blog */
@@ -138,6 +250,11 @@
 .race.highlight {
   background: color-mix(in srgb, var(--accent-color) 8%, transparent);
   border-color: color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.race.highlight:hover {
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+  border-color: var(--accent-color);
 }
 
 /* Variant: Skill */
@@ -176,12 +293,52 @@
   font-size: 0.9rem;
 }
 
+/* Pulse animation for featured cards */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-color) 40%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent-color) 0%, transparent);
+  }
+}
+
+.featured {
+  animation: pulse 2s infinite;
+}
+
 @media (max-width: 768px) {
   .card {
     padding: 1.5rem;
   }
 
+  .card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
   .metadata {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::before,
+  .card::after,
+  .icon,
+  .title,
+  .subtitle,
+  .description,
+  .metaValue,
+  .link {
+    transition: none !important;
+  }
+  
+  .card:hover::after {
+    transform: none;
+  }
+  
+  .featured {
+    animation: none !important;
   }
 }

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,12 +22,26 @@ body {
   min-height: 100vh;
   width: 100vw;
   background-color: #000000;
+  font-family: var(--font-inter);
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Custom cursor for premium feel */
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2"><circle cx="12" cy="12" r="4"/></svg>') 12 12, auto;
+}
+
+/* Custom cursor for interactive elements */
+a, button, [role="button"], input[type="submit"], input[type="button"] {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgba(0,240,255,0.3)" stroke="rgba(0,240,255,1)" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="rgba(0,240,255,1)"/></svg>') 12 12, pointer;
+}
+
+/* For display text - use Space Grotesk */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  font-family: var(--font-display);
 }
 
 #__next {
@@ -42,6 +61,7 @@ body {
   font-weight: 600;
   z-index: 9999;
   border-radius: 0 0 4px 0;
+  transition: top 0.3s ease;
 }
 
 .skip-to-content:focus {
@@ -60,4 +80,81 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border-width: 0;
+}
+
+/* Improved scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.3);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(0, 240, 255, 0.3);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: rgba(0, 240, 255, 0.3);
+  color: #fff;
+}
+
+/* Focus visible improvements */
+:focus-visible {
+  outline: 2px solid rgba(0, 240, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  body {
+    cursor: default;
+  }
+  
+  a, button, [role="button"] {
+    cursor: pointer;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  body {
+    cursor: default;
+  }
+  
+  a, button, [role="button"] {
+    cursor: pointer;
+  }
+}
+
+/* Loading indicator */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
 }
