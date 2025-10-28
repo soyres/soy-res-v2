@@ -223,6 +223,7 @@ export default function EnhancedCircular() {
                 height={500}
                 className={styles.image}
                 priority
+                quality={90}
               />
               
               <div className={styles.hoverOverlay} aria-hidden="true">

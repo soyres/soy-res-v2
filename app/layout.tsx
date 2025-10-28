@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
+import Footer from './components/Footer'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -94,7 +101,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

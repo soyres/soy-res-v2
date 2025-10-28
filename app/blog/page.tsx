@@ -1,8 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import PageHeader from '../components/PageHeader'
-import styles from './Blog.module.css'
+import { 
+  PageContainer, 
+  PageHeader, 
+  EclipseCard,
+  Card,
+  AnimatedSection,
+  SectionTitle 
+} from '../components'
 
 const categories = [
   { name: 'All', count: 18, active: true },
@@ -17,8 +23,7 @@ const featuredPost = {
   date: 'October 20, 2024',
   readTime: '8 min read',
   category: 'Technology',
-  image: '💻',
-  featured: true,
+  icon: '💻',
 }
 
 const posts = [
@@ -28,7 +33,7 @@ const posts = [
     date: 'October 15, 2024',
     readTime: '6 min read',
     category: 'Running',
-    image: '🏃',
+    icon: '🏃',
   },
   {
     title: 'The Power of TypeScript in Modern Web Development',
@@ -36,7 +41,7 @@ const posts = [
     date: 'October 8, 2024',
     readTime: '5 min read',
     category: 'Technology',
-    image: '⚡',
+    icon: '⚡',
   },
   {
     title: 'Morning Routines: How Small Habits Create Big Results',
@@ -44,7 +49,7 @@ const posts = [
     date: 'September 28, 2024',
     readTime: '4 min read',
     category: 'Personal Growth',
-    image: '☀️',
+    icon: '☀️',
   },
   {
     title: 'Building Accessible Web Applications',
@@ -52,7 +57,7 @@ const posts = [
     date: 'September 20, 2024',
     readTime: '7 min read',
     category: 'Technology',
-    image: '♿',
+    icon: '♿',
   },
   {
     title: 'Training Through Injury: Lessons in Patience',
@@ -60,7 +65,7 @@ const posts = [
     date: 'September 12, 2024',
     readTime: '5 min read',
     category: 'Running',
-    image: '🩹',
+    icon: '🩹',
   },
   {
     title: 'Next.js 14: App Router Deep Dive',
@@ -68,204 +73,275 @@ const posts = [
     date: 'August 30, 2024',
     readTime: '9 min read',
     category: 'Technology',
-    image: '🚀',
-  },
-  {
-    title: 'The Compound Effect of Consistency',
-    excerpt: 'Why showing up every day matters more than occasional bursts of motivation.',
-    date: 'August 22, 2024',
-    readTime: '4 min read',
-    category: 'Personal Growth',
-    image: '📈',
-  },
-  {
-    title: 'Race Day Nutrition: What Works for Me',
-    excerpt: 'My go-to nutrition strategy for race day, developed through trial and error.',
-    date: 'August 10, 2024',
-    readTime: '6 min read',
-    category: 'Running',
-    image: '🍌',
-  },
-  {
-    title: 'State Management in React: A 2024 Perspective',
-    excerpt: 'Comparing different state management solutions and when to use each one.',
-    date: 'July 28, 2024',
-    readTime: '8 min read',
-    category: 'Technology',
-    image: '⚛️',
+    icon: '🚀',
   },
 ]
 
+const accentColor = '#00ff88'
+
 export default function Blog() {
   return (
-    <div className={styles.container}>
+    <PageContainer accentColor={accentColor}>
       <PageHeader 
         title="Blog"
         subtitle="Thoughts on code, running, and personal growth"
-        accentColor="#00ff88"
+        accentColor={accentColor}
       />
 
-      <div className={styles.content}>
-        {/* Eclipse Card */}
-        <motion.div 
-          className={styles.eclipseCard}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className={styles.cardContent}>
-            <div className={styles.cardHeader}>
-              <h2 className={styles.cardTitleMain}>Writing & Sharing Knowledge</h2>
-              <p className={styles.cardDescriptionMain}>
-                Exploring the intersection of technology, running, and personal growth. Sharing
-                lessons learned, insights gained, and stories from the journey of continuous
-                learning and self-improvement.
-              </p>
-            </div>
+      <EclipseCard
+        title="Writing & Sharing Knowledge"
+        description="Exploring the intersection of technology, running, and personal growth. Sharing lessons learned, insights gained, and stories from the journey of continuous learning and self-improvement."
+        stats={[
+          { label: 'Total Posts', value: '18' },
+          { label: 'Readers', value: '2.4k' },
+          { label: 'Categories', value: '3' },
+          { label: 'Publishing', value: 'Weekly' }
+        ]}
+        accentColor={accentColor}
+        delay={0.2}
+      />
 
-            <div className={styles.statsOverview}>
-              <div className={styles.statBox}>
-                <div className={styles.statBoxValue}>18</div>
-                <div className={styles.statBoxLabel}>Total Posts</div>
-              </div>
-              <div className={styles.statBox}>
-                <div className={styles.statBoxValue}>2.4k</div>
-                <div className={styles.statBoxLabel}>Readers</div>
-              </div>
-              <div className={styles.statBox}>
-                <div className={styles.statBoxValue}>3</div>
-                <div className={styles.statBoxLabel}>Categories</div>
-              </div>
-              <div className={styles.statBox}>
-                <div className={styles.statBoxValue}>Weekly</div>
-                <div className={styles.statBoxLabel}>Publishing</div>
-              </div>
-            </div>
+      {/* Categories */}
+      <AnimatedSection delay={0.4}>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          justifyContent: 'center',
+          marginBottom: '3rem'
+        }}>
+          {categories.map((category, index) => (
+            <motion.button
+              key={category.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 + index * 0.05, duration: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: category.active ? 'rgba(0, 255, 136, 0.15)' : 'rgba(255, 255, 255, 0.05)',
+                border: category.active ? '1px solid rgba(0, 255, 136, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)',
+                color: category.active ? '#00ff88' : '#888',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '50px',
+                fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
+                fontWeight: '500',
+                cursor: 'pointer',
+                boxShadow: category.active ? '0 0 20px rgba(0, 255, 136, 0.2)' : 'none',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {category.name} ({category.count})
+            </motion.button>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      {/* Featured Post */}
+      <AnimatedSection delay={0.6}>
+        <div style={{ position: 'relative', marginBottom: '3rem' }}>
+          <div style={{
+            position: 'absolute',
+            top: '-1rem',
+            left: 'clamp(1rem, 3vw, 2rem)',
+            background: '#00ff88',
+            color: '#000',
+            padding: '0.5rem 1rem',
+            borderRadius: '8px',
+            fontSize: '0.75rem',
+            fontWeight: '700',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            zIndex: 10
+          }}>
+            Featured
           </div>
-        </motion.div>
-
-        {/* Categories */}
-        <motion.div 
-          className={styles.categoriesSection}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <div className={styles.categories}>
-            {categories.map((category, index) => (
-              <motion.button
-                key={category.name}
-                className={`${styles.categoryButton} ${category.active ? styles.categoryActive : ''}`}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {category.name} ({category.count})
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Featured Post */}
-        <motion.section 
-          className={styles.featuredSection}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <div className={styles.featuredBadge}>Featured</div>
-          <article className={styles.featuredPost}>
-            <div className={styles.featuredIcon}>{featuredPost.image}</div>
-            <div className={styles.featuredContent}>
-              <div className={styles.postMeta}>
-                <span className={styles.postCategory}>{featuredPost.category}</span>
-                <span className={styles.postDate}>{featuredPost.date}</span>
-                <span className={styles.postReadTime}>{featuredPost.readTime}</span>
+          <article style={{
+            background: 'rgba(0, 255, 136, 0.05)',
+            border: '1px solid rgba(0, 255, 136, 0.2)',
+            borderRadius: '20px',
+            padding: 'clamp(2rem, 4vw, 3rem)',
+            display: 'grid',
+            gridTemplateColumns: 'minmax(0, 1fr)',
+            gap: '2rem',
+            transition: 'all 0.3s ease'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: window.innerWidth > 768 ? 'row' : 'column',
+              gap: '2rem',
+              alignItems: 'center'
+            }}>
+              <div style={{
+                fontSize: 'clamp(3rem, 8vw, 5rem)',
+                filter: 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.4))',
+                flexShrink: 0
+              }}>
+                {featuredPost.icon}
               </div>
-              <h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
-              <p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
-              <motion.button 
-                className={styles.readMoreButton}
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                Read More →
-              </motion.button>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '1rem',
+                  fontSize: 'clamp(0.8rem, 1.5vw, 0.875rem)',
+                  marginBottom: '0.75rem'
+                }}>
+                  <span style={{ color: '#00ff88', fontWeight: '600' }}>{featuredPost.category}</span>
+                  <span style={{ color: '#888' }}>{featuredPost.date}</span>
+                  <span style={{ color: '#666' }}>{featuredPost.readTime}</span>
+                </div>
+                <h2 style={{
+                  fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+                  fontWeight: '700',
+                  color: '#fff',
+                  margin: '1rem 0',
+                  lineHeight: '1.3'
+                }}>
+                  {featuredPost.title}
+                </h2>
+                <p style={{
+                  color: '#b0b0b0',
+                  fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
+                  lineHeight: '1.7',
+                  marginBottom: '1.5rem'
+                }}>
+                  {featuredPost.excerpt}
+                </p>
+                <motion.button 
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    color: '#00ff88',
+                    fontSize: 'clamp(0.95rem, 2vw, 1rem)',
+                    fontWeight: '600',
+                    cursor: 'pointer',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  Read More →
+                </motion.button>
+              </div>
             </div>
           </article>
-        </motion.section>
+        </div>
+      </AnimatedSection>
 
-        {/* Recent Posts */}
-        <motion.section 
-          className={styles.postsSection}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          <h2 className={styles.sectionTitle}>Recent Posts</h2>
-          <div className={styles.postsGrid}>
-            {posts.map((post, index) => (
-              <motion.article
-                key={post.title}
-                className={styles.postCard}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 + index * 0.08, duration: 0.5 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              >
-                <div className={styles.postIcon}>{post.image}</div>
-                <div className={styles.postMeta}>
-                  <span className={styles.postCategory}>{post.category}</span>
-                  <span className={styles.postDate}>{post.date}</span>
-                </div>
-                <h3 className={styles.postTitle}>{post.title}</h3>
-                <p className={styles.postExcerpt}>{post.excerpt}</p>
-                <div className={styles.postFooter}>
-                  <span className={styles.postReadTime}>{post.readTime}</span>
-                  <motion.span 
-                    className={styles.postArrow}
-                    whileHover={{ x: 5 }}
-                  >
-                    →
-                  </motion.span>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </motion.section>
+      {/* Recent Posts */}
+      <AnimatedSection delay={0.8}>
+        <SectionTitle accentColor={accentColor}>Recent Posts</SectionTitle>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
+          gap: 'clamp(1.5rem, 3vw, 2rem)',
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {posts.map((post, index) => (
+            <Card
+              key={post.title}
+              variant="blog"
+              title={post.title}
+              subtitle={post.category}
+              description={post.excerpt}
+              icon={post.icon}
+              metadata={{
+                Date: post.date,
+                'Read Time': post.readTime
+              }}
+              accentColor={accentColor}
+              delay={0.9 + (index * 0.08)}
+            />
+          ))}
+        </div>
+      </AnimatedSection>
 
-        {/* Newsletter CTA */}
-        <motion.section 
-          className={styles.newsletterSection}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
-          <div className={styles.newsletterCard}>
-            <div className={styles.newsletterIcon}>✉️</div>
-            <h2 className={styles.newsletterTitle}>Stay Updated</h2>
-            <p className={styles.newsletterText}>
-              Get notified when I publish new posts about technology, running, and personal growth.
-            </p>
-            <div className={styles.newsletterForm}>
-              <input 
-                type="email" 
-                placeholder="Enter your email"
-                className={styles.newsletterInput}
-              />
-              <motion.button 
-                className={styles.newsletterButton}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe
-              </motion.button>
-            </div>
+      {/* Newsletter CTA */}
+      <AnimatedSection delay={1.4}>
+        <div style={{
+          background: 'rgba(0, 255, 136, 0.05)',
+          border: '1px solid rgba(0, 255, 136, 0.15)',
+          borderRadius: '20px',
+          padding: 'clamp(3rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem)',
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto'
+        }}>
+          <div style={{
+            fontSize: 'clamp(3rem, 6vw, 4rem)',
+            marginBottom: '1.5rem',
+            filter: 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.4))'
+          }}>
+            ✉️
           </div>
-        </motion.section>
-      </div>
-    </div>
+          <h2 style={{
+            fontSize: 'clamp(1.5rem, 4vw, 2.25rem)',
+            fontWeight: '700',
+            marginBottom: '1rem',
+            background: 'linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            Stay Updated
+          </h2>
+          <p style={{
+            color: '#888',
+            fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
+            lineHeight: '1.6',
+            marginBottom: '2rem'
+          }}>
+            Get notified when I publish new posts about technology, running, and personal growth.
+          </p>
+          <div style={{
+            display: 'flex',
+            flexDirection: window.innerWidth > 640 ? 'row' : 'column',
+            gap: '1rem',
+            maxWidth: '500px',
+            margin: '0 auto'
+          }}>
+            <input 
+              type="email" 
+              placeholder="Enter your email"
+              style={{
+                flex: 1,
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: '#fff',
+                padding: '1rem 1.5rem',
+                borderRadius: '12px',
+                fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+                outline: 'none'
+              }}
+            />
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: '#00ff88',
+                color: '#000',
+                border: 'none',
+                padding: '1rem 2rem',
+                borderRadius: '12px',
+                fontWeight: '600',
+                fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+                cursor: 'pointer',
+                boxShadow: '0 0 20px rgba(0, 255, 136, 0.3)',
+                transition: 'all 0.3s ease',
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Subscribe
+            </motion.button>
+          </div>
+        </div>
+      </AnimatedSection>
+    </PageContainer>
   )
 }
