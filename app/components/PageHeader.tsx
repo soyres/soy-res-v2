@@ -22,7 +22,7 @@ export default function PageHeader({ title, subtitle, accentColor }: PageHeaderP
       
       <motion.header 
         className={styles.header}
-        initial={{ opacity: 0, y: -20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         style={{ '--accent-color': accentColor } as React.CSSProperties}

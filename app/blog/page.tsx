@@ -147,7 +147,7 @@ export default function Blog() {
         {/* Categories */}
         <motion.div 
           className={styles.categoriesSection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
@@ -171,7 +171,7 @@ export default function Blog() {
         {/* Featured Post */}
         <motion.section 
           className={styles.featuredSection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
@@ -200,7 +200,7 @@ export default function Blog() {
         {/* Recent Posts */}
         <motion.section 
           className={styles.postsSection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
@@ -210,7 +210,7 @@ export default function Blog() {
               <motion.article
                 key={post.title}
                 className={styles.postCard}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.08, duration: 0.5 }}
                 whileHover={{ y: -8, transition: { duration: 0.2 } }}
@@ -239,7 +239,7 @@ export default function Blog() {
         {/* Newsletter CTA */}
         <motion.section 
           className={styles.newsletterSection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
         >

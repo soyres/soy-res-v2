@@ -127,7 +127,7 @@ export default function Running() {
         {/* Stats Overview */}
         <motion.section 
           className={styles.statsSection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
@@ -152,7 +152,7 @@ export default function Running() {
         {/* Goals */}
         <motion.section 
           className={styles.section}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
@@ -190,7 +190,7 @@ export default function Running() {
         {/* Race Results */}
         <motion.section 
           className={styles.section}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
@@ -200,7 +200,7 @@ export default function Running() {
               <motion.div
                 key={race.name}
                 className={`${styles.raceCard} ${race.highlight ? styles.raceHighlight : ''}`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
@@ -230,7 +230,7 @@ export default function Running() {
         {/* Weekly Training Log */}
         <motion.section 
           className={styles.section}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
         >
@@ -262,7 +262,7 @@ export default function Running() {
         {/* Philosophy */}
         <motion.section 
           className={styles.philosophySection}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         >
