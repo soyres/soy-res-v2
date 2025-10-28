@@ -1,0 +1,321 @@
+.container {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header {
+  text-align: center;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: clamp(2.5rem, 10vw, 6rem);
+  font-weight: 800;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #606060 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.4)) drop-shadow(0 0 60px rgba(0, 240, 255, 0.2));
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  font-size: clamp(0.75rem, 1.5vw, 1rem);
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: linear-gradient(180deg, #b0b0b0 0%, #808080 50%, #505050 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.3));
+  margin-top: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #00f0ff;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.imageSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: clamp(240px, 35vw, 420px);
+  height: clamp(240px, 35vw, 420px);
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  z-index: 5;
+}
+
+.imageContainer:hover,
+.imageContainer:focus-visible {
+  transform: scale(1.02);
+}
+
+.imageContainer[data-active-color] {
+  box-shadow: 
+    0 0 0 3px var(--active-color),
+    0 0 20px var(--active-color),
+    0 0 40px var(--active-color);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(0.1) brightness(0.95);
+  transition: filter 0.3s ease;
+}
+
+.imageContainer:hover .image,
+.imageContainer:focus-visible .image {
+  filter: grayscale(0) brightness(1);
+}
+
+.hoverOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.quarter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.quarter.active {
+  opacity: 1;
+}
+
+.q1 {
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
+  background: radial-gradient(circle at 75% 25%, rgba(0, 240, 255, 0.15), transparent 60%);
+}
+
+.q2 {
+  clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%);
+  background: radial-gradient(circle at 75% 75%, rgba(255, 0, 255, 0.15), transparent 60%);
+}
+
+.q3 {
+  clip-path: polygon(50% 50%, 50% 100%, 0% 100%, 0% 50%);
+  background: radial-gradient(circle at 25% 75%, rgba(0, 255, 136, 0.15), transparent 60%);
+}
+
+.q4 {
+  clip-path: polygon(50% 50%, 0% 50%, 0% 0%, 50% 0%);
+  background: radial-gradient(circle at 25% 25%, rgba(255, 255, 0, 0.15), transparent 60%);
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(180deg, #e0e0e0 0%, #a0a0a0 50%, #808080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  filter: drop-shadow(0 0 20px var(--text-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--text-color);
+}
+
+.centerText.active {
+  opacity: 1;
+}
+
+.keyboardNav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.navButton {
+  width: 33px;
+  height: 33px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navButton::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navButton:hover:not(.navButtonActive)::after,
+.navButton:focus-visible:not(.navButtonActive)::after {
+  width: 18px;
+  height: 18px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.navButton:focus-visible {
+  outline: 3px solid rgba(0, 240, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.navButtonActive::after {
+  width: 18px;
+  height: 18px;
+  background-color: var(--quarter-color);
+  border-color: var(--quarter-color);
+  box-shadow: 0 0 24px var(--quarter-color), 0 0 36px var(--quarter-color);
+}
+
+.hint {
+  font-size: 14px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0.5rem 0 0 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.curvedText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(320px, 45vw, 540px);
+  height: clamp(320px, 45vw, 540px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.curvedTextPath {
+  fill: #888;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* Desktop & Tablet - show curved text */
+@media (min-width: 769px) {
+  .hint {
+    display: none;
+  }
+}
+
+/* Mobile - show simple hint, hide curved text */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .imageContainer {
+    width: clamp(220px, 65vw, 280px);
+    height: clamp(220px, 65vw, 280px);
+  }
+  
+  .curvedText {
+    display: none;
+  }
+  
+  .hint {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(*) {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .imageContainer {
+    box-shadow: 0 0 0 3px #ffffff;
+  }
+  
+  .navButton::after {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
+}

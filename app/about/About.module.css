@@ -1,0 +1,290 @@
+.container {
+  min-height: 100vh;
+  background: #000;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.backButton {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: #00f0ff;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.backButton:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: #00f0ff;
+  transform: translateX(-5px);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.header {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(180deg, #00f0ff 0%, #0088cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.4));
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+}
+
+.eclipseCard {
+  width: clamp(300px, 90%, 700px);
+  padding: 3rem;
+  background: radial-gradient(
+    circle at 40% 40%,
+    rgba(0, 240, 255, 0.15),
+    rgba(0, 136, 204, 0.1),
+    rgba(0, 0, 0, 0.95)
+  );
+  border: 3px solid #00f0ff;
+  border-radius: 30px;
+  backdrop-filter: blur(25px);
+  box-shadow: 
+    0 0 60px rgba(0, 240, 255, 0.3),
+    inset 0 0 60px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.eclipseCard::before {
+  content: '◇ ⬡ ◆ ⬢ ◇ ⬡';
+  position: absolute;
+  inset: 15px;
+  border-radius: 30px;
+  border: 1px dashed #00f0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00f0ff;
+  font-size: 1.25rem;
+  opacity: 0.2;
+  animation: rotateSymbols 20s linear infinite;
+  letter-spacing: 3rem;
+  pointer-events: none;
+}
+
+@keyframes rotateSymbols {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+.cardHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px #00f0ff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.cardDescription {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 1rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00f0ff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px #00f0ff;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.projectsGrid {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.projectTitle {
+  font-size: 1.25rem;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.projectTech {
+  font-size: 0.75rem;
+  color: #00f0ff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+}
+
+.projectDescription {
+  color: #ccc;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.projectLinks {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.projectLink {
+  color: #00f0ff;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.projectLink:hover {
+  color: white;
+  text-shadow: 0 0 10px #00f0ff;
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .backButton {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .header {
+    margin-top: 2rem;
+  }
+
+  .eclipseCard {
+    padding: 2rem;
+  }
+
+  .eclipseCard::before {
+    letter-spacing: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eclipseCard::before {
+    animation: none !important;
+  }
+  
+  :global(*) {
+    transition: none !important;
+  }
+}

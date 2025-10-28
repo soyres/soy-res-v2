@@ -1,0 +1,239 @@
+.container {
+  min-height: 100vh;
+  background: #000;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+.header {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.eclipseCard {
+  width: clamp(300px, 90%, 700px);
+  padding: 3rem;
+  background: radial-gradient(
+    circle at 40% 40%,
+    color-mix(in srgb, var(--accent-color) 15%, transparent),
+    color-mix(in srgb, var(--accent-color) 10%, transparent),
+    rgba(0, 0, 0, 0.95)
+  );
+  border: 3px solid var(--accent-color);
+  border-radius: 30px;
+  backdrop-filter: blur(25px);
+  box-shadow: 
+    0 0 60px color-mix(in srgb, var(--accent-color) 30%, transparent),
+    inset 0 0 60px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.eclipseCard::before {
+  content: '◇ ⬡ ◆ ⬢ ◇ ⬡';
+  position: absolute;
+  inset: 15px;
+  border-radius: 30px;
+  border: 1px dashed var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  font-size: 1.25rem;
+  opacity: 0.2;
+  animation: rotateSymbols 20s linear infinite;
+  letter-spacing: 3rem;
+  pointer-events: none;
+}
+
+@keyframes rotateSymbols {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+.cardHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px var(--accent-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.cardDescription {
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 1rem;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 20%, transparent);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 30%, transparent);
+  transform: translateY(-3px);
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 15px var(--accent-color);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.projectsGrid {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.projectCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--accent-color) 20%, transparent);
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.projectTitle {
+  font-size: 1.25rem;
+  color: white;
+  margin: 0 0 0.5rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+}
+
+.projectTech {
+  font-size: 0.75rem;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1rem 0;
+}
+
+.projectDescription {
+  color: #ccc;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.projectLinks {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.projectLink {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.projectLink:hover {
+  color: white;
+  text-shadow: 0 0 10px var(--accent-color);
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .header {
+    margin-top: 2rem;
+  }
+
+  .eclipseCard {
+    padding: 2rem;
+  }
+
+  .eclipseCard::before {
+    letter-spacing: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eclipseCard::before {
+    animation: none !important;
+  }
+  
+  :global(*) {
+    transition: none !important;
+  }
+}
