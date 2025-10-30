@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { siteConfig } from '@/app/config/siteConfig'
+import { siteConfig } from '@/config/siteConfig'
 import styles from './Footer.module.css'
 
 const socialLinks = [
