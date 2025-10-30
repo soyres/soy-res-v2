@@ -7,6 +7,7 @@ import styles from './EnhancedCircularNav.module.css'
 
 interface QuarterInfo {
   id: number
+  kbNavPosition: number
   title: string
   subtitle: string
   description: string
@@ -17,7 +18,8 @@ interface QuarterInfo {
 
 const quarters: QuarterInfo[] = [
   { 
-    id: 1, 
+    id: 1,
+    kbNavPosition: 2,
     title: 'Projects',
     subtitle: 'Coding Portfolio',
     description: 'Full-stack applications and open source contributions',
@@ -30,6 +32,7 @@ const quarters: QuarterInfo[] = [
   },
   { 
     id: 2, 
+    kbNavPosition: 3,
     title: 'Running',
     subtitle: 'Marathon Training',
     description: 'Personal records and training insights',
@@ -41,7 +44,8 @@ const quarters: QuarterInfo[] = [
     href: '/running'
   },
   { 
-    id: 3, 
+    id: 3,
+    kbNavPosition: 4,
     title: 'Blog',
     subtitle: 'Tech & Life',
     description: 'Writing about code, running, and personal growth',
@@ -53,7 +57,8 @@ const quarters: QuarterInfo[] = [
     href: '/blog'
   },
   { 
-    id: 4, 
+    id: 4,
+    kbNavPosition: 1,
     title: 'About',
     subtitle: 'My Story',
     description: 'Software engineer, runner, and lifelong learner',
@@ -177,6 +182,7 @@ export default function EnhancedCircular() {
   }
 
   const activeQuarterInfo = quarters.find(q => q.id === activeQuarter)
+  const lowerNavPosition = quarters.sort((a, b) => a.kbNavPosition - b.kbNavPosition)
 
   return (
     <>
@@ -269,9 +275,10 @@ export default function EnhancedCircular() {
           </nav>
 
           <div className={styles.keyboardNav} role="navigation" aria-label="Section quick access">
-            {quarters.map((quarter) => (
+            {lowerNavPosition.map((quarter) => {
+              return (
               <button
-                key={quarter.id}
+                key={quarter.kbNavPosition}
                 className={`${styles.navButton} ${activeQuarter === quarter.id ? styles.navButtonActive : ''}`}
                 style={{ '--quarter-color': quarter.color } as React.CSSProperties}
                 onClick={() => window.location.href = quarter.href}
@@ -296,7 +303,9 @@ export default function EnhancedCircular() {
               >
                 <span className="sr-only">{quarter.title}</span>
               </button>
-            ))}
+              )
+
+})}
           </div>
 
           <motion.p 
