@@ -83,8 +83,29 @@ export default function EnhancedCircular() {
   const [taglineText, setTaglineText] = useState('')
   const [showContent, setShowContent] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [showTutorial, setShowTutorial] = useState(false)
+
   const imageRef = useRef<HTMLDivElement>(null)
   const isButtonHover = useRef(false)
+
+  useEffect(() => {
+  if (showContent && !prefersReducedMotion) {
+    setTimeout(() => {
+      setShowTutorial(true)
+      // Cycle through quarters briefly
+      const tutorial = [4, 1, 2, 3, null]
+      let step = 0
+      const interval = setInterval(() => {
+        setActiveQuarter(tutorial[step])
+        step++
+        if (step >= tutorial.length) {
+          clearInterval(interval)
+          setShowTutorial(false)
+        }
+      }, 500)
+    }, 250)
+  }
+}, [showContent, prefersReducedMotion])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -265,8 +286,8 @@ export default function EnhancedCircular() {
                 />
               </defs>
               <text className={styles.curvedTextPath}>
-                <textPath href="#circlePath" startOffset="43%">
-                  HOVER OVER THE IMAGE
+                <textPath href="#circlePath" startOffset="35%">
+                  Click any section to explore
                 </textPath>
               </text>
             </svg>
